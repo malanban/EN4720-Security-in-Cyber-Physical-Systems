@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Blueprint, Flask, jsonify, request
 import json
 from Crypto.Cipher import AES
+from hashing_functions import HashingUtil
 
-app = Flask(__name__)
+hashing_api = Blueprint('hashing_api' ,__name__)
 
 def parse_request():
     """Function to handle JSON and raw text request body parsing."""
@@ -16,7 +17,7 @@ def parse_request():
         return None
 
 # Generate-HASH value
-@app.route("/generate-hash", methods = ["POST"])
+@hashing_api.route("/generate-hash", methods = ["POST"])
 def generateHash():
     arguments = parse_request()
     if arguments is None:
@@ -25,13 +26,15 @@ def generateHash():
     data = arguments.get("data")
     algorithm = arguments.get("algorithm")
 
-    return jsonify({
-        "data" : data,
-        "algorithm" : algorithm
-    }), 200
+    if (data is None) or (algorithm is None):
+        return jsonify({"error": "Invalid Input Request"}), 400
+    
+    algorithm = algorithm.upper()
+
+    return jsonify(HashingUtil.generate_hash(data, algorithm)), 200
     
 # Verify-HASH value
-@app.route("/verify-hash", methods = ["POST"])
+@hashing_api.route("/verify-hash", methods = ["POST"])
 def verifyHash():
     arguments = parse_request()
     if arguments is None:
@@ -41,22 +44,9 @@ def verifyHash():
     hash_value = arguments.get("hash_value")
     algorithm = arguments.get("algorithm")
 
-    return jsonify({
-        "data" : data,
-        "hash_value" : hash_value,
-        "algorithm" : algorithm
-    }), 200
-
-# Handle unsupported HTTP methods
-@app.errorhandler(405)
-def method_not_allowed(error):
-    return jsonify({"error": "Method Not Allowed", "message": "Use a valid HTTP method"}), 405
-
-# Handle unknown routes
-@app.errorhandler(404)
-def not_found(error):
-    return jsonify({"error": "Not Found", "message": "Invalid API endpoint"}), 404
+    if (data is None) or (hash_value is None) or (algorithm is None):
+        return jsonify({"error": "Invalid Inuput Request"}), 400
     
+    algorithm = algorithm.upper()
 
-if __name__ == "__main__" :
-    app.run(debug=True)
+    return jsonify(HashingUtil.verify_hash(data, hash_value, algorithm)), 200
