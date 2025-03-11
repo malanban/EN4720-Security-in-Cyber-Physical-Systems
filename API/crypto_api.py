@@ -108,9 +108,14 @@ def decrypt():
 
     if query_key_type != algorithm.upper():
         return jsonify({"error": f"KeyID_Type-{query_key_type} and Algorithm-{algorithm} Mismatch"}), 400
-
+    
     if query_key_type == "AES":
-        return jsonify({"ciphertext": AES_Util.decrypt_text(ciphertext, query_key_value_1)}), 200
+        plaintext, error = AES_Util.decrypt_text(ciphertext, query_key_value_1)
     elif query_key_type == "RSA":
-        return jsonify({"ciphertext": RSA_Util.decrypt_text(ciphertext, query_key_value_2)}), 200
+        plaintext, error = RSA_Util.decrypt_text(ciphertext, query_key_value_2)
+    
+    if plaintext is not None:
+        return jsonify({"plaintext": plaintext}), 200
+    else:
+        return jsonify({"error": error}), 400
 

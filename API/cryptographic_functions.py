@@ -37,11 +37,19 @@ class AES_Util:
         """
         Decrypts AES-encrypted text.
         """
-        key = base64.b64decode(base64_key)
-        cipher = AES.new(key, AES.MODE_ECB)
-        encrypted_bytes = base64.b64decode(encrypted_text)
-        decrypted_bytes = unpad(cipher.decrypt(encrypted_bytes), AES.block_size)
-        return decrypted_bytes.decode('utf-8')
+        try:
+            key = base64.b64decode(base64_key)
+            cipher = AES.new(key, AES.MODE_ECB)
+            encrypted_bytes = base64.b64decode(encrypted_text)
+            decrypted_bytes = unpad(cipher.decrypt(encrypted_bytes), AES.block_size)
+            return decrypted_bytes.decode('utf-8'), None
+        
+        except ValueError as e:
+            return None, f"Decryption failed: Invalid input data or incorrect padding ({e})"
+        except TypeError as e:
+            return None, f"Decryption failed: Invalid base64 encoding ({e})"
+        except Exception as e:
+            return None, f"An unexpected error occurred: {e}"    
 
 
 class RSA_Util:
@@ -68,10 +76,18 @@ class RSA_Util:
     @staticmethod
     def decrypt_text(encrypted_text: str, base64_private_key: str) -> str:
         """
-        Decrypts RSA-encrypted text.
+        Decrypts RSA-encrypted text with error handling.
         """
-        private_key = RSA.import_key(base64.b64decode(base64_private_key))
-        cipher = PKCS1_OAEP.new(private_key)
-        encrypted_bytes = base64.b64decode(encrypted_text)
-        decrypted_bytes = cipher.decrypt(encrypted_bytes)
-        return decrypted_bytes.decode('utf-8')
+        try:
+            private_key = RSA.import_key(base64.b64decode(base64_private_key))
+            cipher = PKCS1_OAEP.new(private_key)
+            encrypted_bytes = base64.b64decode(encrypted_text)
+            decrypted_bytes = cipher.decrypt(encrypted_bytes)
+            return decrypted_bytes.decode('utf-8'), None
+
+        except ValueError as e:
+            return None, f"Decryption failed: Invalid input data ({e})"
+        except (TypeError, KeyError) as e:
+            return None, f"Decryption failed: Invalid key or encryption format ({e})"
+        except Exception as e:
+            return None, f"An unexpected error occurred: {e}"

@@ -8,6 +8,11 @@ app = Flask(__name__)
 app.register_blueprint(crypto_api)
 app.register_blueprint(hashing_api)
 
+@app.get("/")
+def read_root():
+    return {"message": "API Launched Successfully",
+            "Team": "The Infected Crew"}
+
 # Handle unknown routes (404)
 @app.errorhandler(404)
 def handle_404(error):
