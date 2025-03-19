@@ -5,7 +5,7 @@ class APIDatabase:
     DB_CONFIG = {
         "host": "localhost",
         "user": "root",
-        "password": "root",
+        "password": "Concy@280200",
         "database": "cyber_security"
     }
     

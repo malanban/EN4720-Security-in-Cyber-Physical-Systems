@@ -21,13 +21,13 @@ def parse_request():
 def generateHash():
     arguments = parse_request()
     if arguments is None:
-        return jsonify({"error": "Invalid JSON format"}), 400
+        return jsonify({"error": "Invalid request format. Expected JSON input."}), 400
     
     data = arguments.get("data")
     algorithm = arguments.get("algorithm")
 
     if (data is None) or (algorithm is None):
-        return jsonify({"error": "Invalid Input Request"}), 400
+        return jsonify({"error": "Missing required fields."}), 400
     
     algorithm = algorithm.upper()
 
@@ -38,14 +38,14 @@ def generateHash():
 def verifyHash():
     arguments = parse_request()
     if arguments is None:
-        return jsonify({"error": "Invalid JSON format"}), 400
+        return jsonify({"error": "Invalid request format. Expected JSON input."}), 400
 
     data = arguments.get("data")
     hash_value = arguments.get("hash_value")
     algorithm = arguments.get("algorithm")
 
     if (data is None) or (hash_value is None) or (algorithm is None):
-        return jsonify({"error": "Invalid Inuput Request"}), 400
+        return jsonify({"error": "Missing required fields. Ensure 'data', 'hash_value' and 'algorithm' are provided."}), 400
     
     algorithm = algorithm.upper()
 

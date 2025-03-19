@@ -22,15 +22,15 @@ def parse_request():
 def generateKey():
     arguments = parse_request()
     if arguments is None:
-        return jsonify({"error": "Invalid JSON format"}), 400
+        return jsonify({"error": "Invalid request format. Expected JSON input."}), 400
     
     key_type = arguments.get("key_type")
     key_size = arguments.get("key_size")
 
     if not isinstance(key_type, str):
-        return jsonify({"error": "Key type is invalid datatype"}), 400
+        return jsonify({"error": "Invalid key type. Expected a string value."}), 400
     elif key_type.upper() not in {"AES", "RSA"}:
-        return jsonify({"error": "Key type is  invalid format"}), 400
+        return jsonify({"error": "Unsupported key type. Choose either 'AES' or 'RSA'."}), 400
     else:
         key_type = key_type.upper()
 
@@ -43,7 +43,7 @@ def generateKey():
         return jsonify(APIDatabase.insert_key(key_type, key_size, public_key, private_key)), 200
 
     else:
-        return jsonify({"error": "Invalid Key Size or Type"}), 400
+        return jsonify({"error": "Invalid key size for the selected type. AES supports 128, 192, or 256 bits. RSA supports 1024, 2048, or 4096 bits."}), 400
    
 
 
@@ -53,14 +53,14 @@ def generateKey():
 def encrypt():
     arguments = parse_request()
     if arguments is None:
-        return jsonify({"error": "Invalid JSON format"}), 400
+        return jsonify({"error": "Invalid request format. Expected JSON input."}), 400
 
     key_id = arguments.get("key_id") 
     plaintext = arguments.get("plaintext")
     algorithm = arguments.get("algorithm")
 
     if (key_id is None) or (plaintext is None) or (algorithm is None):
-        return jsonify({"error": "Invalid Inuput Request"}), 400
+        return jsonify({"error": "Missing required fields. Ensure 'key_id', 'plaintext', and 'algorithm' are provided."}), 400
 
     query_response = APIDatabase.get_key_by_id(key_id)
 
@@ -87,14 +87,14 @@ def encrypt():
 def decrypt():
     arguments = parse_request()
     if arguments is None:
-        return jsonify({"error": "Invalid JSON format"}), 400
+        return jsonify({"error": "Invalid request format. Expected JSON input."}), 400
     
     key_id = arguments.get("key_id")
     ciphertext = arguments.get("ciphertext")
     algorithm = arguments.get("algorithm")
 
     if (key_id is None) or (ciphertext is None) or (algorithm is None):
-        return jsonify({"error": "Invalid Inuput Request"}), 400
+        return jsonify({"error": "Missing required fields. Ensure 'key_id', 'ciphertext' and 'algorithm' are provided."}), 400
 
     query_response = APIDatabase.get_key_by_id(key_id)
 

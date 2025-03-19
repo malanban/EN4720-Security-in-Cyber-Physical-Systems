@@ -18,7 +18,7 @@ class HashingUtil:
         try:
             # Validate algorithm
             if algorithm not in HashingUtil.SUPPORTED_ALGORITHMS:
-                return {"hash_value": None, "error": f"Unsupported algorithm. Supported: {list(HashingUtil.SUPPORTED_ALGORITHMS.keys())}"}
+                return {"hash_value": None, "error": f"Unsupported hashing algorithm. Supported: {list(HashingUtil.SUPPORTED_ALGORITHMS.keys())}"}
 
             # Convert string data to bytes
             data_bytes = data.encode('utf-8')
@@ -44,7 +44,7 @@ class HashingUtil:
         try:
             # Validate algorithm
             if algorithm not in HashingUtil.SUPPORTED_ALGORITHMS:
-                return {"is_valid": None, "error": f"Unsupported algorithm. Supported: {list(HashingUtil.SUPPORTED_ALGORITHMS.keys())}"}
+                return {"is_valid": None, "error": f"Unsupported hashing algorithm. Supported: {list(HashingUtil.SUPPORTED_ALGORITHMS.keys())}"}
 
             # Generate new hash from input data
             new_hash = HashingUtil.generate_hash(data, algorithm).get("hash_value")
@@ -57,7 +57,7 @@ class HashingUtil:
             # Compare hashes
             is_valid = (new_hash == hash_value)
             print(is_valid)
-            message = "Hash matches the data." if is_valid else "Hash does not match the data."
+            message = "Hash verification successful. The hash matches the input data." if is_valid else "Hash verification failed. The hash does not match the input data."
             return { "is_valid": is_valid, "message": message }
             
         except Exception as e:
