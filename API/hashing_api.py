@@ -27,7 +27,7 @@ def generateHash():
     algorithm = arguments.get("algorithm")
 
     if (data is None) or (algorithm is None):
-        return jsonify({"error": "Missing required fields."}), 400
+        return jsonify({"error": "Missing required fields. Ensure 'data', and 'algorithm' are provided."}), 400
     
     algorithm = algorithm.upper()
 
