@@ -8,16 +8,16 @@ This project provides a set of APIs for handling cryptographic operations and ha
 
 ```
 /EN4720-Security-in-Cyber-Physical-Systems/
-    │── API/
-        |── SQL_Database/
-            |── 
-        │── api.py                      # Main Python script handling all API requests
-        │── crypto_api.py               # Handles cryptographic API requests
-        │── hashing_api.py              # Handles hashing API requests
-        │── cryptographic_functions.py  # Functions for key generation, encryption, and decryption
-        │── hashing_functions.py        # Functions for hashing and verification
-        │── api_database.py             # Manages key storage and retrieval using key ID
-        │── requirements.txt            # Required dependencies
+│── API/                                      
+│   │── SQL_Database/                         
+│   │   │── cyber_security_database.sql       # SQL database for localhost
+│   │── api.py                                # Main Python script handling all API requests
+│   │── api_database.py                       # Manages key storage and retrieval using key IDs
+│   │── crypto_api.py                         # Handles cryptographic API requests
+│   │── cryptographic_functions.py            # Functions for key generation, encryption, and decryption
+│   │── hashing_api.py                        # Handles hashing API requests
+│   │── hashing_functions.py                  # Functions for hashing and verification
+│   │── requirements.txt                      # Required dependencies
 ```
 
 ## How to run
