@@ -64,7 +64,7 @@ Running the API script locally on your personal computer.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-repository/EN4720-Security-in-Cyber-Physical-Systems.git
+   git clone https://github.com/malanban/EN4720-Security-in-Cyber-Physical-Systems.git
    ```
 
 2. Install mysql
@@ -93,7 +93,7 @@ Running the API script locally on your personal computer.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-repository/EN4720-Security-in-Cyber-Physical-Systems.git
+   git clone https://github.com/malanban/EN4720-Security-in-Cyber-Physical-Systems.git
    ```
 
 2. Installing Depedencies
