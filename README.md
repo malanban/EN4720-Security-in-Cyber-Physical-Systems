@@ -9,7 +9,8 @@ This project provides a set of APIs for handling cryptographic operations and ha
 ```
 /EN4720-Security-in-Cyber-Physical-Systems/
     │── API/
-        │── README.md                   # Documentation for the API module
+        |── SQL_Database/
+            |── 
         │── api.py                      # Main Python script handling all API requests
         │── crypto_api.py               # Handles cryptographic API requests
         │── hashing_api.py              # Handles hashing API requests
