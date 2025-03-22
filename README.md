@@ -97,6 +97,9 @@ Running the API script locally on your personal computer.
    ```
 
 2. Installing Depedencies
+   ```bash
+   cd EN4720-Security-in-Cyber-Physical-Systems
+   ```
 
    ```bash
    pip install -r requirements.txt
@@ -104,7 +107,7 @@ Running the API script locally on your personal computer.
 
 3. Navigate to the API directory:
    ```bash
-   cd EN4720-Security-in-Cyber-Physical-Systems/API
+   cd API
    ```
 4. Open api_database.py file:
 
