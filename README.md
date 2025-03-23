@@ -48,7 +48,7 @@ The API is already hosted online and can be accessed directly. Sending an HTTP r
    - _URLs_
 
      ```
-     https://vercel.com/anbus-projects-c25d417f/en4720-the-infected-crew
+     https://en4720-the-infected-crew.vercel.app/
      ```
 
      ```
