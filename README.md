@@ -117,7 +117,7 @@ Running the API script locally on your personal computer.
        DB_CONFIG = {
         "host": "localhost",
         "user": "root",                #update with your SQL user
-        "password": "Concy@280200",    #update with your SQL password
+        "password": "your_password",    #update with your SQL password
         "database": "cyber_security"
       }
    ```
